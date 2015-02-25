@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+        <!-- Content -->
+
+        <RelativeLayout
+            android:id="@+id/main_frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/list2"
+                android:layout_marginTop="@dimen/list_margin_top" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_height="@dimen/list_action_bar_height"
+                    android:layout_width="match_parent"
+                    android:background="?attr/colorPrimary"
+                    android:gravity="bottom"
+                    android:title="@string/title"
+                    app:titleMarginStart="@dimen/list_default_padding"
+                    app:titleMarginBottom="@dimen/list_default_padding" />
+
+                <!-- toolBar shadow -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@drawable/toolbar_shadow"
+                    />
+                </LinearLayout>
+
+            <ImageView
+                android:layout_width="@dimen/fab_size"
+                android:layout_height="@dimen/fab_size"
+                android:padding="@dimen/fab_padding"
+                android:background="@drawable/floating_action_button"
+                android:layout_marginLeft="@dimen/fab_margin_left"
+                android:layout_marginStart="@dimen/fab_margin_left"
+                android:layout_marginTop="@dimen/fab_margin_top"
+                android:contentDescription="@string/image_contentDescription"
+                android:src="@drawable/ic_add_white_48dp"
+                />
+
+        </RelativeLayout>
+
+        <!-- Side Drawer -->
+        <LinearLayout
+            android:id="@+id/drawer_view"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="#88FFFFFF"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+    </android.support.v4.widget.DrawerLayout>
+
+</LinearLayout>

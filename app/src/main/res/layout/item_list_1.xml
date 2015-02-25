@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="@dimen/list_image_size"
+        android:layout_height="@dimen/list_image_size"
+        android:padding="@dimen/list_image_padding"
+        android:src="@drawable/ic_circle"
+        android:id="@+id/list_imageView"
+        android:contentDescription="@string/image_contentDescription"
+        />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:layout_marginRight="@dimen/list_default_padding"
+            android:layout_marginEnd="@dimen/list_default_padding"
+            >
+
+            <TextView
+                android:id="@+id/list_body2"
+                android:text="@string/body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:fontFamily="sans-serif"
+                android:singleLine="true"
+                />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                >
+
+                <TextView
+                    android:id="@+id/list_body1"
+                    android:text="@string/body1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:fontFamily="sans-serif-medium"
+                    android:singleLine="true"
+                    />
+
+                <TextView
+                    android:id="@+id/list_caption"
+                    android:text="@string/caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:fontFamily="sans-serif"
+                    android:singleLine="true"
+
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black_dividers"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

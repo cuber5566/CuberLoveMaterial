@@ -1,0 +1,116 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:orientation="vertical"
+        android:padding="@dimen/abc_action_bar_default_padding_material"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:text="Display4 Light 112sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+            android:fontFamily="sans-serif-light"
+            android:lineSpacingExtra="@dimen/abc_text_size_display_4_material"
+            android:background="@color/primary"/>
+
+        <TextView
+            android:text="Display3 Regular 56sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+            android:fontFamily="sans-serif"
+            android:lineSpacingExtra="@dimen/abc_text_size_display_3_material"
+            android:background="@color/pink"/>
+
+        <TextView
+            android:text="Display2 Regular 45sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+            android:fontFamily="sans-serif"
+            android:lineSpacingExtra="@dimen/abc_text_size_display_2_material"
+            android:background="@color/primary"/>
+
+        <TextView
+            android:text="Display1 Regular 34sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:fontFamily="sans-serif"
+            android:lineSpacingExtra="@dimen/abc_text_size_display_1_material"
+            android:background="@color/pink"/>
+
+        <TextView
+            android:text="Headline Regular 24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:fontFamily="sans-serif"
+            android:lineSpacingExtra="@dimen/abc_text_size_headline_material"
+            android:background="@color/primary"/>
+
+        <TextView
+            android:text="Title Medium 20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:fontFamily="sans-serif-medium"
+            android:lineSpacingExtra="@dimen/abc_text_size_title_material"
+            android:background="@color/pink"/>
+
+        <TextView
+            android:text="Subhead Regular 16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:fontFamily="sans-serif"
+            android:lineSpacingExtra="@dimen/abc_text_size_subhead_material"
+            android:background="@color/primary"/>
+
+        <TextView
+            android:text="Body2 Regular 14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:fontFamily="sans-serif-medium"
+            android:lineSpacingExtra="@dimen/abc_text_size_body_2_material"
+            android:background="@color/pink"/>
+
+        <TextView
+            android:text="Body1 Medium 14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:fontFamily="sans-serif"
+            android:lineSpacingExtra="@dimen/abc_text_size_body_1_material"
+            android:background="@color/primary"/>
+
+        <TextView
+            android:text="Caption Regular 14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:fontFamily="sans-serif"
+            android:lineSpacingExtra="@dimen/abc_text_size_caption_material"
+            android:background="@color/pink"/>
+
+        <TextView
+            android:text="Button Medium 12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:fontFamily="sans-serif-medium"
+            android:lineSpacingExtra="@dimen/abc_text_size_button_material"
+            android:background="@color/primary"/>
+
+    </LinearLayout>
+</ScrollView>

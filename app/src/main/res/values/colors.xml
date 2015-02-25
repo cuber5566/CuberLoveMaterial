@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Primary -->
+    <color name="primary">@color/indigo</color>
+    <color name="primary_light">@color/indigo_light</color>
+    <color name="primary_dark">@color/indigo_dark</color>
+
+    <!-- Accent -->
+    <color name="accent">@color/pink</color>
+    <color name="accent_light">@color/pink_light</color>
+    <color name="accent_dark">@color/pink_dark</color>
+
+    <!-- Black -->
+    <color name="black">#FF000000</color>
+    <color name="black_dividers">#1E000000</color>
+    <color name="black_disabled">#42000000</color>
+    <color name="black_text_hint">#42000000</color>
+    <color name="black_text_secondary">#8A000000</color>
+    <color name="black_icons">#8A000000</color>
+    <color name="black_text">#DE000000</color>
+
+    <!-- White -->
+    <color name="white">#FFFFFFFF</color>
+    <color name="white_dividers">#1EFFFFFF</color>
+    <color name="white_disabled">#4CFFFFFF</color>
+    <color name="white_text_hint">#4CFFFFFF</color>
+    <color name="white_text_secondary">#B2FFFFFF</color>
+    <color name="white_icons">#B2FFFFFF</color>
+    <color name="white_text">#FFFFFFFF</color>
+
+    <!-- Sample -->
+    <color name="indigo">#3F51B5</color>
+    <color name="indigo_light">#C5CAE9</color>
+    <color name="indigo_dark">#303F9F</color>
+
+    <color name="pink">#FF4081</color>
+    <color name="pink_light">#FF80AB</color>
+    <color name="pink_dark">#F50057</color>
+
+</resources>

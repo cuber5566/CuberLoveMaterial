@@ -1,0 +1,26 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+
+    <!-- List 2 -->
+    <dimen name="list_image_size">72dp</dimen>
+    <dimen name="list_image_padding">16dp</dimen>
+    <dimen name="list_icon_size">48dp</dimen>
+    <dimen name="list_icon_padding">16dp</dimen>
+    <dimen name="list_default_padding">16dp</dimen>
+    <dimen name="list_vertical_spacing">8dp</dimen>
+    <dimen name="list_subhead_height">48dp</dimen>
+
+    <!-- List 2 -->
+    <dimen name="list_action_bar_height">128dp</dimen>
+    <dimen name="list_title_height">72dp</dimen>
+    <dimen name="list_margin_top">119dp</dimen>
+
+    <!-- FAB -->
+    <dimen name="fab_size">40dp</dimen>
+    <dimen name="fab_margin_top">108dp</dimen>
+    <dimen name="fab_margin_left">16dp</dimen>
+    <dimen name="fab_padding">8dp</dimen>
+</resources>

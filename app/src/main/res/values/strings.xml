@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CuberLoveMaterial</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="drawer_open">Drawer Open</string>
+    <string name="drawer_close">Drawer Close</string>
+
+    <!-- main -->
+    <string name="main_text">text</string>
+    <string name="main_list_1">list1</string>
+    <string name="main_list_2">list2</string>
+    <string name="main_list_3">list3</string>
+
+    <string name="title">Title</string>
+    <string name="subhead">Subhead</string>
+    <string name="image_contentDescription">Image</string>
+    <string name="icon_contentDescription">Icon</string>
+    <string name="body1">Body1</string>
+    <string name="body2">Body2</string>
+    <string name="caption">Caption</string>
+
+</resources>
