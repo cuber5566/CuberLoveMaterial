@@ -14,9 +14,9 @@ import android.widget.Button;
 
 public class FlatButton extends Button {
 
-    final int ANIMATION_DURATION_DISABLED = 300;
-    final int ANIMATION_DURATION_FOCUS = 400;
-    final int ANIMATION_DURATION_PRESS = 2500;
+    final int ANIMATION_DURATION_DISABLED = 500;
+    final int ANIMATION_DURATION_FOCUS = 2500;
+    final int ANIMATION_DURATION_PRESS = 300;
 
     float radius = 48;
     float cur_radius;
@@ -50,6 +50,7 @@ public class FlatButton extends Button {
                 setAntiAlias(true);
             }
         };
+
     }
 
     @Override
@@ -172,7 +173,7 @@ public class FlatButton extends Button {
             }
         });
         colorAnimation.setInterpolator(new DecelerateInterpolator());
-        colorAnimation.setDuration(ANIMATION_DURATION_FOCUS);
+        colorAnimation.setDuration(ANIMATION_DURATION_PRESS);
         colorAnimation.start();
 
         changeRippleRadius(true);
@@ -198,8 +199,8 @@ public class FlatButton extends Button {
 
         radiusAnimation.setInterpolator(new CycleInterpolator(1));
         radiusAnimation.setRepeatCount(Integer.MAX_VALUE);
-        radiusAnimation.setStartDelay(ANIMATION_DURATION_FOCUS);
-        radiusAnimation.setDuration(ANIMATION_DURATION_PRESS);
+        radiusAnimation.setStartDelay(ANIMATION_DURATION_PRESS);
+        radiusAnimation.setDuration(ANIMATION_DURATION_FOCUS);
         radiusAnimation.start();
     }
 }
