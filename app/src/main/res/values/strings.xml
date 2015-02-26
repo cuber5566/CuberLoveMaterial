@@ -13,6 +13,7 @@
     <string name="main_list_1">list1</string>
     <string name="main_list_2">list2</string>
     <string name="main_list_3">list3</string>
+    <string name="main_button">button</string>
 
     <string name="title">Title</string>
     <string name="subhead">Subhead</string>
