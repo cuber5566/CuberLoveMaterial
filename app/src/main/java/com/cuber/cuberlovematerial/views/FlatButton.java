@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.animation.CycleInterpolator;
@@ -21,7 +22,7 @@ public class FlatButton extends Button {
     float radius = 48;
     float cur_radius;
     float max_radius;
-    Paint ripplePaint;
+    Paint ripplePaint, backgroundPaint;
 
     float x, y;
 
@@ -51,6 +52,12 @@ public class FlatButton extends Button {
             }
         };
 
+        backgroundPaint = new Paint() {
+            {
+                setAntiAlias(true);
+            }
+        };
+        backgroundPaint.setColor(0x00000000);
     }
 
     @Override
@@ -87,11 +94,13 @@ public class FlatButton extends Button {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
+
         height = canvas.getHeight();
         width = canvas.getWidth();
+        canvas.drawRoundRect(new RectF(0, 0, width, height), getResources().getDisplayMetrics().density * 3, getResources().getDisplayMetrics().density * 3, backgroundPaint);
         canvas.drawCircle(x, y, cur_radius, ripplePaint);
 
+        super.onDraw(canvas);
     }
 
     private void changeTextColor(boolean enabled) {
@@ -132,7 +141,9 @@ public class FlatButton extends Button {
         colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                setBackgroundColor((Integer) valueAnimator.getAnimatedValue());
+//                setBackgroundColor((Integer) valueAnimator.getAnimatedValue());
+                backgroundPaint.setColor((Integer) valueAnimator.getAnimatedValue());
+                invalidate();
             }
         });
         colorAnimation.setInterpolator(new DecelerateInterpolator());
