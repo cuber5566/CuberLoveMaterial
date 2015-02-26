@@ -17,7 +17,7 @@ public class FlatButton extends Button {
 
     final int ANIMATION_DURATION_DISABLED = 500;
     final int ANIMATION_DURATION_FOCUS = 2500;
-    final int ANIMATION_DURATION_PRESS = 300;
+    final int ANIMATION_DURATION_PRESS = 500;
 
     float radius = 48;
     float cur_radius;
@@ -30,6 +30,7 @@ public class FlatButton extends Button {
 
     int pressColor = 0xFFFF4081;
     int rippleColor = 0xFFFFFFFF;
+    RectF rectF;
 
     public FlatButton(Context context) {
         this(context, null);
@@ -43,6 +44,7 @@ public class FlatButton extends Button {
         super(context, attrs, defStyleAttr);
         radius = getResources().getDisplayMetrics().density * radius;
         setPaint();
+        rectF =  new RectF();
     }
 
     private void setPaint() {
@@ -80,6 +82,7 @@ public class FlatButton extends Button {
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:
+                start_radius = cur_radius;
                 changeBackgroundColor(false);
                 changeRippleColor(false);
                 changeRippleRadius(false);
@@ -97,7 +100,9 @@ public class FlatButton extends Button {
 
         height = canvas.getHeight();
         width = canvas.getWidth();
-        canvas.drawRoundRect(new RectF(0, 0, width, height), getResources().getDisplayMetrics().density * 3, getResources().getDisplayMetrics().density * 3, backgroundPaint);
+        rectF.set(0, 0, width, height);
+
+        canvas.drawRoundRect(rectF, getResources().getDisplayMetrics().density * 3, getResources().getDisplayMetrics().density * 3, backgroundPaint);
         canvas.drawCircle(x, y, cur_radius, ripplePaint);
 
         super.onDraw(canvas);
@@ -151,6 +156,7 @@ public class FlatButton extends Button {
         colorAnimation.start();
     }
 
+    float start_radius;
     private void changeRippleColor(final boolean visible) {
 
         ValueAnimator colorAnimation;
@@ -178,7 +184,7 @@ public class FlatButton extends Button {
 
                     max_radius = (float) Math.sqrt(max_x * max_x + max_y * max_y);
                     float up = max_radius - radius;
-                    cur_radius = radius + up * Math.abs((Color.alpha(color) / (255 * 0.3f)) - 1);
+                    cur_radius = start_radius + up * Math.abs((Color.alpha(color) / (255 * 0.3f)) - 1);
                 }
                 invalidate();
             }
