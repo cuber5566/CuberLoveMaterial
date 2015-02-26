@@ -70,6 +70,9 @@ public class FlatButton extends Button {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if(!isEnabled())
+            return false;
+
         x = event.getX();
         y = event.getY();
         switch (event.getAction()) {
@@ -115,9 +118,9 @@ public class FlatButton extends Button {
         int normalTextColor = Color.argb((int) (255 * 1.0), Color.red(textColor), Color.green(textColor), Color.blue(textColor));
 
         if (enabled) {
-            colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), normalTextColor, disabledTextColor);
-        } else {
             colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), disabledTextColor, normalTextColor);
+        } else {
+            colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), normalTextColor, disabledTextColor);
         }
 
         colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
