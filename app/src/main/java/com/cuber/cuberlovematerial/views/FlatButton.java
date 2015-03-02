@@ -23,7 +23,7 @@ public class FlatButton extends Button {
     final int ANIMATION_DURATION_DISABLED = 500;
     final int ANIMATION_DURATION_FOCUS = 2500;
     final int ANIMATION_DURATION_PRESS = 250;
-    final int ANIMATION_DURATION_UP = 500;
+    final int ANIMATION_DURATION_UP = 400;
 
     float radius = 48;
     float cur_radius;
