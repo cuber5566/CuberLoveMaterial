@@ -3,10 +3,10 @@
 ![Screenshot](https://github.com/cuber5566/CuberLoveMaterial/blob/master/app/src/main/res/drawable/button_readme.jpg)
 # attrs
 ``` java
-    <!-- Floating Action Button -->
-    <declare-styleable name="FloatingActionButton">
-        <attr name="button_float_action_background_color" format="color"/>
-
+    <!-- Flat Button -->
+    <declare-styleable name="FlatButton">
+        <attr name="button_flat_press_color" format="color"/>
+        <attr name="button_flat_ripple_color" format="color"/>
     </declare-styleable>
 
     <!-- Raised Button -->
@@ -14,11 +14,11 @@
         <attr name="button_raised_background_color" format="color"/>
         <attr name="button_raised_ripple_color" format="color"/>
     </declare-styleable>
+    
+    <!-- Floating Action Button -->
+    <declare-styleable name="FloatingActionButton">
+        <attr name="button_float_action_background_color" format="color"/>
 
-    <!-- Flat Button -->
-    <declare-styleable name="FlatButton">
-        <attr name="button_flat_press_color" format="color"/>
-        <attr name="button_flat_ripple_color" format="color"/>
     </declare-styleable>
 ```
 # xml
