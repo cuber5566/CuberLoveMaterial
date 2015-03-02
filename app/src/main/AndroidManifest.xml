@@ -22,9 +22,6 @@
         <activity
             android:name=".List2Activity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity
-            android:name=".List3Activity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".ButtonActivity"/>
     </application>
 

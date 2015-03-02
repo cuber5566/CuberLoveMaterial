@@ -24,12 +24,6 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/main_list_3"
-        android:id="@+id/main_list3" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/main_button"
         android:id="@+id/main_button" />
 </LinearLayout>
