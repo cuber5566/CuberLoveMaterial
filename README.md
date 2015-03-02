@@ -18,7 +18,6 @@
     <!-- Floating Action Button -->
     <declare-styleable name="FloatingActionButton">
         <attr name="button_float_action_background_color" format="color"/>
-
     </declare-styleable>
 ```
 # xml
