@@ -22,7 +22,7 @@ public class FlatButton extends Button {
 
     final int ANIMATION_DURATION_DISABLED = 500;
     final int ANIMATION_DURATION_FOCUS = 2500;
-    final int ANIMATION_DURATION_PRESS = 500;
+    final int ANIMATION_DURATION_PRESS = 250;
     final int ANIMATION_DURATION_UP = 500;
 
     float radius = 48;
@@ -236,8 +236,10 @@ public class FlatButton extends Button {
 
         if (visible) {
             colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), normalBackgroundColor, pressBackgroundColor);
+            colorAnimation.setDuration(ANIMATION_DURATION_PRESS);
         } else {
             colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), pressBackgroundColor, normalBackgroundColor);
+            colorAnimation.setDuration(ANIMATION_DURATION_UP);
         }
 
         colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -253,12 +255,12 @@ public class FlatButton extends Button {
                     max_radius = (float) Math.sqrt(max_x * max_x + max_y * max_y);
                     float up = max_radius - radius;
                     cur_radius = start_radius + up * Math.abs((Color.alpha(color) / (255 * 0.3f)) - 1);
+
                 }
                 invalidate();
             }
         });
         colorAnimation.setInterpolator(new DecelerateInterpolator());
-        colorAnimation.setDuration(ANIMATION_DURATION_PRESS);
         colorAnimation.start();
 
         changeRippleRadius(true);

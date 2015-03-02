@@ -263,8 +263,10 @@ public class RaisedButton extends Button {
 
         if (visible) {
             colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), normalBackgroundColor, pressBackgroundColor);
+            colorAnimation.setDuration(ANIMATION_DURATION_PRESS);
         } else {
             colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), pressBackgroundColor, normalBackgroundColor);
+            colorAnimation.setDuration(ANIMATION_DURATION_UP);
         }
 
         colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -272,26 +274,23 @@ public class RaisedButton extends Button {
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 int color = (Integer) valueAnimator.getAnimatedValue();
                 ripplePaint.setColor(color);
-//                backgroundPaint.setShadowLayer(SHADOW_RADIUS + Color.alpha(color) * 10 / 255, SHADOW_OFFSET_X, SHADOW_OFFSET_Y, Color.argb(Color.alpha(color) + (int) (255 * 0.7), Color.red(shadowColor), Color.green(shadowColor), Color.blue(shadowColor)));
 
                 if (visible) {
 
                     cur_radius = radius * Color.alpha(color) / (255 * 0.3f);
-                    colorAnimation.setDuration(ANIMATION_DURATION_PRESS);
+
                 } else {
 
                     max_radius = (float) Math.sqrt(max_x * max_x + max_y * max_y);
                     float up = max_radius - radius;
                     cur_radius = start_radius + up * Math.abs((Color.alpha(color) / (255 * 0.3f)) - 1);
-                    colorAnimation.setDuration(ANIMATION_DURATION_UP);
+
                 }
                 invalidate();
             }
         });
         colorAnimation.setInterpolator(new DecelerateInterpolator());
-
         colorAnimation.start();
-
         changeRippleRadius(true);
     }
 
