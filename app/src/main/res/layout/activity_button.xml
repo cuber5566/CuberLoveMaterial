@@ -1,29 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center">
 
     <com.cuber.cuberlovematerial.views.FlatButton
-        android:id="@+id/disabled_flatButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="18dp"
-        android:text="Normal"
-        android:background="#00ffffff"
-        />
-
-    <com.cuber.cuberlovematerial.views.FlatButton
         android:id="@+id/hover_flatButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="18dp"
-        android:paddingBottom="18dp"
-        android:paddingLeft="36dp"
-        android:paddingRight="36dp"
-        android:text="Hover"
-        android:background="#00ffffff"
+        android:text="FlatButton"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        app:button_flat_press_color="@color/accent"
+        app:button_flat_ripple_color="@color/white"
         />
+
+    <com.cuber.cuberlovematerial.views.RaisedButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RaisedButton"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        app:button_raised_background_color="@color/white"
+        app:button_raised_ripple_color="@color/white"
+        />
+
+    <com.cuber.cuberlovematerial.views.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="@dimen/fab_size"
+        android:layout_height="@dimen/fab_size"
+        android:padding="@dimen/fab_padding"
+        app:button_float_action_background_color="@color/accent"
+        android:src="@drawable/ic_add_white_24dp" />
 
 </LinearLayout>

@@ -43,15 +43,6 @@ public class MainActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
-        Button list3 = (Button)findViewById(R.id.main_list3);
-        list3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent  = new Intent();
-                intent.setClass(MainActivity.this, List3Activity.class);
-                startActivity(intent);
-            }
-        });
         Button button = (Button)findViewById(R.id.main_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

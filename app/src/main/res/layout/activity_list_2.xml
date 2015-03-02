@@ -40,17 +40,16 @@
                 app:titleMarginStart="@dimen/list_default_padding"
                 app:titleMarginBottom="@dimen/list_default_padding" />
 
-            <ImageView
-                android:id="@+id/list2_fab"
-                android:layout_width="@dimen/fab_size"
-                android:layout_height="@dimen/fab_size"
-                android:padding="@dimen/fab_padding"
-                android:background="@drawable/fab"
+            <com.cuber.cuberlovematerial.views.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="@dimen/fab_size_mini"
+                android:layout_height="@dimen/fab_size_mini"
+                android:padding="@dimen/fab_padding_mini"
                 android:layout_marginLeft="@dimen/fab_margin_left"
                 android:layout_marginStart="@dimen/fab_margin_left"
                 android:layout_marginTop="@dimen/fab_margin_top"
-                android:src="@drawable/ic_add_white_48dp"
-                />
+                app:button_float_action_background_color="@color/accent"
+                android:src="@drawable/ic_add_white_24dp" />
 
         </RelativeLayout>
 

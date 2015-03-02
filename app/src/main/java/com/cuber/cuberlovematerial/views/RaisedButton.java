@@ -9,21 +9,28 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 
 import com.cuber.cuberlovematerial.R;
 
-public class FlatButton extends Button {
+public class RaisedButton extends Button {
 
     final int ANIMATION_DURATION_DISABLED = 500;
     final int ANIMATION_DURATION_FOCUS = 2500;
-    final int ANIMATION_DURATION_PRESS = 500;
+    final int ANIMATION_DURATION_PRESS = 250;
     final int ANIMATION_DURATION_UP = 500;
+
+    int shadowColor = Color.BLACK;
+    final float SHADOW_RADIUS = 6.0f;
+    final float SHADOW_OFFSET_X = 0f;
+    final float SHADOW_OFFSET_Y = 3f;
 
     float radius = 48;
     float cur_radius;
@@ -34,26 +41,27 @@ public class FlatButton extends Button {
 
     int height, width;
 
-    int pressColor = 0xFFFFFFFF;
-    int rippleColor = 0xFFFFFFFF;
+    int backgroundColor = Color.BLACK;
+    int rippleColor = Color.BLACK;
+
     RectF rectF;
-
-    boolean isClicked = false;
-
+    float padding = 6;
     int paddingTop = 16;
     int paddingBottom = 16;
     int paddingLeft = 32;
     int paddingRight = 32;
 
-    public FlatButton(Context context) {
+    boolean isClicked = false;
+
+    public RaisedButton(Context context) {
         this(context, null);
     }
 
-    public FlatButton(Context context, AttributeSet attrs) {
+    public RaisedButton(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public FlatButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public RaisedButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         radius = getResources().getDisplayMetrics().density * radius;
         paddingTop = (int) getResources().getDisplayMetrics().density * paddingTop;
@@ -61,17 +69,22 @@ public class FlatButton extends Button {
         paddingLeft = (int) getResources().getDisplayMetrics().density * paddingLeft;
         paddingRight = (int) getResources().getDisplayMetrics().density * paddingRight;
         setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
+
+        rectF = new RectF();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
         setAttributes(context, attrs);
         setGravity(Gravity.CENTER);
         setPaint();
-        rectF =  new RectF();
 
     }
 
     private void setAttributes(Context context, AttributeSet attrs) {
         Resources.Theme theme = context.getTheme();
         if (theme != null) {
-            TypedArray typedArray = theme.obtainStyledAttributes(attrs, R.styleable.FlatButton, 0, 0);
+            TypedArray typedArray = theme.obtainStyledAttributes(attrs, R.styleable.RaisedButton, 0, 0);
             if (typedArray != null) {
 
                 int n = typedArray.getIndexCount();
@@ -80,10 +93,10 @@ public class FlatButton extends Button {
                     int attr = typedArray.getIndex(i);
 
                     switch (attr) {
-                        case R.styleable.FlatButton_button_flat_press_color:
-                            pressColor = typedArray.getColor(i, 0xFFFFFFFF);
+                        case R.styleable.RaisedButton_button_raised_background_color:
+                            backgroundColor = typedArray.getColor(i, 0xFFFFFFFF);
                             break;
-                        case R.styleable.FlatButton_button_flat_ripple_color:
+                        case R.styleable.RaisedButton_button_raised_ripple_color:
                             rippleColor = typedArray.getColor(i, 0xFFFFFFFF);
                             break;
                     }
@@ -103,9 +116,11 @@ public class FlatButton extends Button {
         backgroundPaint = new Paint() {
             {
                 setAntiAlias(true);
+                setStyle(Style.FILL);
+                setShadowLayer(SHADOW_RADIUS, SHADOW_OFFSET_X, SHADOW_OFFSET_Y, Color.argb((int) (255 * 0.75), Color.red(shadowColor), Color.green(shadowColor), Color.blue(shadowColor)));
+                setColor(backgroundColor);
             }
         };
-        backgroundPaint.setColor(0x00000000);
     }
 
     @Override
@@ -116,23 +131,30 @@ public class FlatButton extends Button {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(!isEnabled())
+        if (!isEnabled() || isClicked)
             return false;
 
         x = event.getX();
         y = event.getY();
+
+
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+
                 changeBackgroundColor(true);
                 changeRippleColor(true);
                 changeRippleRadius(true);
                 break;
             case MotionEvent.ACTION_MOVE:
+
                 invalidate();
                 break;
+
             case MotionEvent.ACTION_UP:
+                isClicked = true;
                 start_radius = cur_radius;
                 changeBackgroundColor(false);
+
 
                 if (0 < x && x < width && 0 < y && y < height) {
                     changeRippleColor(false);
@@ -147,14 +169,11 @@ public class FlatButton extends Button {
                     isClicked = false;
                     invalidate();
                 }
-
-                performClick();
-                break;
-            case MotionEvent.ACTION_CANCEL:
                 break;
         }
         return true;
     }
+
     Runnable clickRunnable = new Runnable() {
         @Override
         public void run() {
@@ -162,15 +181,21 @@ public class FlatButton extends Button {
             isClicked = false;
         }
     };
+
     @Override
     protected void onDraw(Canvas canvas) {
 
         height = canvas.getHeight();
         width = canvas.getWidth();
-        rectF.set(0, 0, width, height);
+        rectF.set(0 + padding, 0 + padding, width - padding, height - padding*2);
+
 
         canvas.drawRoundRect(rectF, getResources().getDisplayMetrics().density * 2, getResources().getDisplayMetrics().density * 2, backgroundPaint);
+
+        canvas.save();
+        canvas.clipRect(rectF);
         canvas.drawCircle(x, y, cur_radius, ripplePaint);
+        canvas.restore();
 
         super.onDraw(canvas);
     }
@@ -183,7 +208,6 @@ public class FlatButton extends Button {
 
         if (enabled) {
             colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), disabledTextColor, normalTextColor);
-
         } else {
             colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), normalTextColor, disabledTextColor);
         }
@@ -202,20 +226,22 @@ public class FlatButton extends Button {
     private void changeBackgroundColor(boolean focus) {
 
         ValueAnimator colorAnimation;
-        int pressBackgroundColor = Color.argb((int) (255 * 1.0), Color.red(pressColor), Color.green(pressColor), Color.blue(pressColor));
-        int normalBackgroundColor = Color.argb((int) (255 * 0.0), Color.red(pressColor), Color.green(pressColor), Color.blue(pressColor));
 
         if (focus) {
-            colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), normalBackgroundColor, pressBackgroundColor);
+            colorAnimation = ValueAnimator.ofFloat(1.0f, 0.75f);
         } else {
-            colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), pressBackgroundColor, normalBackgroundColor);
+            colorAnimation = ValueAnimator.ofFloat(0.75f, 1.0f);
         }
 
         colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
-//                setBackgroundColor((Integer) valueAnimator.getAnimatedValue());
-                backgroundPaint.setColor((Integer) valueAnimator.getAnimatedValue());
+                float v = (float) valueAnimator.getAnimatedValue();
+                float[] hsv = new float[3];
+                Color.colorToHSV(backgroundColor, hsv);
+                hsv[2] *= v;
+                backgroundPaint.setColor(Color.HSVToColor(hsv));
+                backgroundPaint.setShadowLayer(SHADOW_RADIUS + Math.abs(v - 1.0f) * 5, SHADOW_OFFSET_X, SHADOW_OFFSET_Y, Color.argb((int) (255 * Math.abs(v - 1.75f)), Color.red(shadowColor), Color.green(shadowColor), Color.blue(shadowColor)));
                 invalidate();
             }
         });
@@ -225,9 +251,10 @@ public class FlatButton extends Button {
     }
 
     float start_radius;
+
     private void changeRippleColor(final boolean visible) {
 
-        ValueAnimator colorAnimation;
+        final ValueAnimator colorAnimation;
         final float max_x = x > width / 2 ? x : width - x;
         final float max_y = y > width / 2 ? y : width - y;
 
@@ -245,20 +272,24 @@ public class FlatButton extends Button {
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 int color = (Integer) valueAnimator.getAnimatedValue();
                 ripplePaint.setColor(color);
+//                backgroundPaint.setShadowLayer(SHADOW_RADIUS + Color.alpha(color) * 10 / 255, SHADOW_OFFSET_X, SHADOW_OFFSET_Y, Color.argb(Color.alpha(color) + (int) (255 * 0.7), Color.red(shadowColor), Color.green(shadowColor), Color.blue(shadowColor)));
 
                 if (visible) {
+
                     cur_radius = radius * Color.alpha(color) / (255 * 0.3f);
+                    colorAnimation.setDuration(ANIMATION_DURATION_PRESS);
                 } else {
 
                     max_radius = (float) Math.sqrt(max_x * max_x + max_y * max_y);
                     float up = max_radius - radius;
                     cur_radius = start_radius + up * Math.abs((Color.alpha(color) / (255 * 0.3f)) - 1);
+                    colorAnimation.setDuration(ANIMATION_DURATION_UP);
                 }
                 invalidate();
             }
         });
         colorAnimation.setInterpolator(new DecelerateInterpolator());
-        colorAnimation.setDuration(ANIMATION_DURATION_PRESS);
+
         colorAnimation.start();
 
         changeRippleRadius(true);
