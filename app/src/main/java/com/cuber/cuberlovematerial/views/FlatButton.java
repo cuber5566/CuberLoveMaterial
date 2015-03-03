@@ -148,7 +148,6 @@ public class FlatButton extends Button {
                     invalidate();
                 }
 
-                performClick();
                 break;
             case MotionEvent.ACTION_CANCEL:
                 break;
