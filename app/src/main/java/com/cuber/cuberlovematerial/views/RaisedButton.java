@@ -241,7 +241,7 @@ public class RaisedButton extends Button {
                 Color.colorToHSV(backgroundColor, hsv);
                 hsv[2] *= v;
                 backgroundPaint.setColor(Color.HSVToColor(hsv));
-                backgroundPaint.setShadowLayer(SHADOW_RADIUS + Math.abs(v - 1.0f) * 5, SHADOW_OFFSET_X, SHADOW_OFFSET_Y, Color.argb((int) (255 * Math.abs(v - 1.75f)), Color.red(shadowColor), Color.green(shadowColor), Color.blue(shadowColor)));
+                backgroundPaint.setShadowLayer(SHADOW_RADIUS + Math.abs(v - 1.0f) * 10, SHADOW_OFFSET_X, SHADOW_OFFSET_Y, Color.argb((int) (255 * Math.abs(v - 1.75f)), Color.red(shadowColor), Color.green(shadowColor), Color.blue(shadowColor)));
                 invalidate();
             }
         });
