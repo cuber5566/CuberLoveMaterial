@@ -18,13 +18,13 @@
     <dimen name="list_margin_top">119dp</dimen>
 
     <!-- FAB min-->
-    <dimen name="fab_size_mini">46dp</dimen>
+    <dimen name="fab_size_mini">48dp</dimen>
     <dimen name="fab_padding_mini">8dp</dimen>
     <dimen name="fab_margin_top">108dp</dimen>
-    <dimen name="fab_margin_left">13dp</dimen>
+    <dimen name="fab_margin_left">12dp</dimen>
 
     <!-- FAB -->
-    <dimen name="fab_size">62dp</dimen>
+    <dimen name="fab_size">64dp</dimen>
     <dimen name="fab_padding">16dp</dimen>
 
     <!-- Flat Button -->
