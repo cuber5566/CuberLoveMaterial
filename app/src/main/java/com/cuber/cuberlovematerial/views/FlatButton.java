@@ -55,7 +55,7 @@ public class FlatButton extends Button {
         setAttributes(context, attrs);
         setGravity(Gravity.CENTER);
         setPaint();
-        rectF =  new RectF();
+        rectF = new RectF();
 
     }
 
@@ -107,44 +107,47 @@ public class FlatButton extends Button {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(!isEnabled())
+        if (!isEnabled())
             return false;
 
         x = event.getX();
         y = event.getY();
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                changeBackgroundColor(true);
-                changeRippleColor(true);
-                changeRippleRadius(true);
-                break;
-            case MotionEvent.ACTION_MOVE:
-                invalidate();
-                break;
-            case MotionEvent.ACTION_UP:
-                start_radius = cur_radius;
-                changeBackgroundColor(false);
-
-                if (0 < x && x < width && 0 < y && y < height) {
-                    changeRippleColor(false);
-                    changeRippleRadius(false);
-                    postDelayed(clickRunnable, ANIMATION_DURATION_UP - 200);
-
-                } else {
-
-                    if (radiusAnimation != null)
-                        radiusAnimation.cancel();
-                    ripplePaint.setColor(Color.argb((int) (255 * 0.0), Color.red(rippleColor), Color.green(rippleColor), Color.blue(rippleColor)));
-                    isClicked = false;
+        if (!isClicked)
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    changeBackgroundColor(true);
+                    changeRippleColor(true);
+                    changeRippleRadius(true);
+                    break;
+                case MotionEvent.ACTION_MOVE:
                     invalidate();
-                }
+                    break;
+                case MotionEvent.ACTION_UP:
+                    isClicked = true;
+                    start_radius = cur_radius;
+                    changeBackgroundColor(false);
 
-                break;
-            case MotionEvent.ACTION_CANCEL:
-                break;
-        }
+                    if (0 < x && x < width && 0 < y && y < height) {
+                        changeRippleColor(false);
+                        changeRippleRadius(false);
+                        postDelayed(clickRunnable, ANIMATION_DURATION_UP - 200);
+
+                    } else {
+
+                        if (radiusAnimation != null)
+                            radiusAnimation.cancel();
+                        ripplePaint.setColor(Color.argb((int) (255 * 0.0), Color.red(rippleColor), Color.green(rippleColor), Color.blue(rippleColor)));
+                        isClicked = false;
+                        invalidate();
+                    }
+
+                    break;
+                case MotionEvent.ACTION_CANCEL:
+                    break;
+            }
         return true;
     }
+
     Runnable clickRunnable = new Runnable() {
         @Override
         public void run() {
@@ -152,6 +155,7 @@ public class FlatButton extends Button {
             isClicked = false;
         }
     };
+
     @Override
     protected void onDraw(Canvas canvas) {
 
@@ -215,6 +219,7 @@ public class FlatButton extends Button {
     }
 
     float start_radius;
+
     private void changeRippleColor(final boolean visible) {
 
         ValueAnimator colorAnimation;
