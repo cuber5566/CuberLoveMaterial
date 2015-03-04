@@ -156,7 +156,7 @@ public class RaisedButton extends Button {
 
                     if (radiusAnimation != null)
                         radiusAnimation.cancel();
-                    ripplePaint.setColor(Color.argb((int) (255 * 0.0), Color.red(rippleColor), Color.green(rippleColor), Color.blue(rippleColor)));
+                    ripplePaint.setColor(Color.argb((int) (255 * 0.5), Color.red(rippleColor), Color.green(rippleColor), Color.blue(rippleColor)));
                     isClicked = false;
                     invalidate();
                 }
@@ -178,7 +178,7 @@ public class RaisedButton extends Button {
 
         height = canvas.getHeight();
         width = canvas.getWidth();
-        rectF.set(0 + padding, 0 + padding, width - padding, height - padding*2);
+        rectF.set(0 + padding, 0 + padding, width - padding, height - padding * 2);
 
 
         canvas.drawRoundRect(rectF, getResources().getDisplayMetrics().density * 2, getResources().getDisplayMetrics().density * 2, backgroundPaint);
@@ -232,7 +232,7 @@ public class RaisedButton extends Button {
                 Color.colorToHSV(backgroundColor, hsv);
                 hsv[2] *= v;
                 backgroundPaint.setColor(Color.HSVToColor(hsv));
-                backgroundPaint.setShadowLayer(SHADOW_RADIUS + Math.abs(v - 1.0f) * 10, SHADOW_OFFSET_X, SHADOW_OFFSET_Y, Color.argb((int) (255 * Math.abs(v - 1.75f)), Color.red(shadowColor), Color.green(shadowColor), Color.blue(shadowColor)));
+                backgroundPaint.setShadowLayer(SHADOW_RADIUS + Math.abs(v - 1.0f) * 10, SHADOW_OFFSET_X, SHADOW_OFFSET_Y, Color.argb((int) (255 * Math.abs(v * 2 - 2.5)), Color.red(shadowColor), Color.green(shadowColor), Color.blue(shadowColor)));
                 invalidate();
             }
         });
