@@ -1,6 +1,6 @@
 # Material Button
 
-![Screenshot](https://github.com/cuber5566/CuberLoveMaterial/blob/master/app/src/main/res/drawable/button_readme.jpg)
+![Screenshot](http://g.recordit.co/2qMebBhxh9.gif)
 # attrs
 ``` java
     <!-- Flat Button -->
