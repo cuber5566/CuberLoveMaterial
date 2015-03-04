@@ -25,6 +25,10 @@ public class FlatButton extends Button {
     final int ANIMATION_DURATION_PRESS = 250;
     final int ANIMATION_DURATION_UP = 400;
 
+    final int STATE_DOWN = 0;
+    final int STATE_UP = 1;
+    final int STATE_CANCEL = 2;
+
     float radius = 48;
     float cur_radius;
     float max_radius;
@@ -115,28 +119,32 @@ public class FlatButton extends Button {
         if (!isClicked)
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
+
                     changeBackgroundColor(true);
                     changeRippleColor(true);
-                    changeRippleRadius(true);
+                    startRippleRadiusFocus(true);
+                    changeRippleRadius(STATE_DOWN);
+
                     break;
                 case MotionEvent.ACTION_MOVE:
                     invalidate();
                     break;
                 case MotionEvent.ACTION_UP:
+
                     isClicked = true;
                     start_radius = cur_radius;
                     changeBackgroundColor(false);
+                    startRippleRadiusFocus(false);
+                    changeRippleColor(false);
 
                     if (0 < x && x < width && 0 < y && y < height) {
-                        changeRippleColor(false);
-                        changeRippleRadius(false);
+
+                        changeRippleRadius(STATE_UP);
                         postDelayed(clickRunnable, ANIMATION_DURATION_UP - 200);
 
                     } else {
 
-                        if (radiusAnimation != null)
-                            radiusAnimation.cancel();
-                        ripplePaint.setColor(Color.argb((int) (255 * 0.0), Color.red(rippleColor), Color.green(rippleColor), Color.blue(rippleColor)));
+                        changeRippleRadius(STATE_CANCEL);
                         isClicked = false;
                         invalidate();
                     }
@@ -208,7 +216,6 @@ public class FlatButton extends Button {
         colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
-//                setBackgroundColor((Integer) valueAnimator.getAnimatedValue());
                 backgroundPaint.setColor((Integer) valueAnimator.getAnimatedValue());
                 invalidate();
             }
@@ -223,8 +230,6 @@ public class FlatButton extends Button {
     private void changeRippleColor(final boolean visible) {
 
         ValueAnimator colorAnimation;
-        final float max_x = x > width / 2 ? x : width - x;
-        final float max_y = y > width / 2 ? y : width - y;
 
         int normalBackgroundColor = Color.argb((int) (255 * 0.0), Color.red(rippleColor), Color.green(rippleColor), Color.blue(rippleColor));
         int pressBackgroundColor = Color.argb((int) (255 * 0.3), Color.red(rippleColor), Color.green(rippleColor), Color.blue(rippleColor));
@@ -242,28 +247,54 @@ public class FlatButton extends Button {
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 int color = (Integer) valueAnimator.getAnimatedValue();
                 ripplePaint.setColor(color);
-
-                if (visible) {
-                    cur_radius = radius * Color.alpha(color) / (255 * 0.3f);
-                } else {
-
-                    max_radius = (float) Math.sqrt(max_x * max_x + max_y * max_y);
-                    float up = max_radius - radius;
-                    cur_radius = start_radius + up * Math.abs((Color.alpha(color) / (255 * 0.3f)) - 1);
-
-                }
                 invalidate();
             }
         });
         colorAnimation.setInterpolator(new DecelerateInterpolator());
         colorAnimation.start();
 
-        changeRippleRadius(true);
+    }
+
+
+    private void changeRippleRadius(int state) {
+        ValueAnimator radiusAnimation;
+        final float max_x = x > width / 2 ? x : width - x;
+        final float max_y = y > width / 2 ? y : width - y;
+        max_radius = (float) Math.sqrt(max_x * max_x + max_y * max_y);
+
+        switch (state){
+
+            case STATE_DOWN:
+                radiusAnimation = ValueAnimator.ofFloat(0, radius);
+                radiusAnimation.setDuration(ANIMATION_DURATION_PRESS);
+                break;
+
+            case STATE_UP:
+                radiusAnimation = ValueAnimator.ofFloat(cur_radius, max_radius);
+                radiusAnimation.setDuration(ANIMATION_DURATION_UP);
+                break;
+
+            default:
+                radiusAnimation = ValueAnimator.ofFloat(cur_radius, 0);
+                radiusAnimation.setDuration(ANIMATION_DURATION_UP);
+                break;
+        }
+        radiusAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                float value = (float) valueAnimator.getAnimatedValue();
+
+                cur_radius = value;
+                invalidate();
+            }
+        });
+        radiusAnimation.setInterpolator(new DecelerateInterpolator());
+        radiusAnimation.start();
     }
 
     ValueAnimator radiusAnimation;
 
-    private void changeRippleRadius(final boolean start) {
+    private void startRippleRadiusFocus(final boolean start) {
 
         if (radiusAnimation != null)
             radiusAnimation.cancel();
