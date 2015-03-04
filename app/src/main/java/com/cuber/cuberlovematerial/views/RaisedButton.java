@@ -46,10 +46,6 @@ public class RaisedButton extends Button {
 
     RectF rectF;
     float padding = 6;
-    int paddingTop = 16;
-    int paddingBottom = 16;
-    int paddingLeft = 32;
-    int paddingRight = 32;
 
     boolean isClicked = false;
 
@@ -64,11 +60,6 @@ public class RaisedButton extends Button {
     public RaisedButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         radius = getResources().getDisplayMetrics().density * radius;
-        paddingTop = (int) getResources().getDisplayMetrics().density * paddingTop;
-        paddingBottom = (int) getResources().getDisplayMetrics().density * paddingBottom;
-        paddingLeft = (int) getResources().getDisplayMetrics().density * paddingLeft;
-        paddingRight = (int) getResources().getDisplayMetrics().density * paddingRight;
-        setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
 
         rectF = new RectF();
 

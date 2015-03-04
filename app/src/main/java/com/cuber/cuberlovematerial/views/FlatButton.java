@@ -40,10 +40,6 @@ public class FlatButton extends Button {
 
     boolean isClicked = false;
 
-    int paddingTop = 16;
-    int paddingBottom = 16;
-    int paddingLeft = 32;
-    int paddingRight = 32;
 
     public FlatButton(Context context) {
         this(context, null);
@@ -56,11 +52,6 @@ public class FlatButton extends Button {
     public FlatButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         radius = getResources().getDisplayMetrics().density * radius;
-        paddingTop = (int) getResources().getDisplayMetrics().density * paddingTop;
-        paddingBottom = (int) getResources().getDisplayMetrics().density * paddingBottom;
-        paddingLeft = (int) getResources().getDisplayMetrics().density * paddingLeft;
-        paddingRight = (int) getResources().getDisplayMetrics().density * paddingRight;
-        setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
         setAttributes(context, attrs);
         setGravity(Gravity.CENTER);
         setPaint();
