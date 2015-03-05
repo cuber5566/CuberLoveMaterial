@@ -160,6 +160,7 @@ public class RaisedButton extends Button {
                     break;
 
                 case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
 
                     isClicked = true;
                     start_radius = cur_radius;

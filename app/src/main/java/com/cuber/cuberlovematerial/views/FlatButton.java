@@ -111,7 +111,7 @@ public class FlatButton extends Button {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (!isEnabled())
+        if (!isEnabled() || isClicked)
             return false;
 
         x = event.getX();
@@ -130,6 +130,7 @@ public class FlatButton extends Button {
                     invalidate();
                     break;
                 case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
 
                     isClicked = true;
                     start_radius = cur_radius;
@@ -149,8 +150,6 @@ public class FlatButton extends Button {
                         invalidate();
                     }
 
-                    break;
-                case MotionEvent.ACTION_CANCEL:
                     break;
             }
         return true;
@@ -221,7 +220,7 @@ public class FlatButton extends Button {
             }
         });
         colorAnimation.setInterpolator(new DecelerateInterpolator());
-        colorAnimation.setDuration(ANIMATION_DURATION_DISABLED);
+        colorAnimation.setDuration(ANIMATION_DURATION_UP);
         colorAnimation.start();
     }
 
