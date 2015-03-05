@@ -7,7 +7,7 @@
     android:gravity="center">
 
     <com.cuber.cuberlovematerial.views.FlatButton
-        android:id="@+id/hover_flatButton"
+        android:id="@+id/flatButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="FlatButton"
@@ -21,6 +21,7 @@
         />
 
     <com.cuber.cuberlovematerial.views.RaisedButton
+        android:id="@+id/raisedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="RaisedButton"
@@ -28,6 +29,8 @@
         android:textColor="@color/black"
         app:button_raised_background_color="@color/white"
         app:button_raised_ripple_color="@color/black"
+        app:button_raised_background_color_disable="@color/grey_400"
+        app:button_raised_text_color_disable="@color/grey_500"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:paddingLeft="32dp"
@@ -35,7 +38,7 @@
         />
 
     <com.cuber.cuberlovematerial.views.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/floatingActionButton"
         android:layout_width="@dimen/fab_size"
         android:layout_height="@dimen/fab_size"
         android:padding="@dimen/fab_padding"

@@ -22,6 +22,8 @@
     <declare-styleable name="RaisedButton">
         <attr name="button_raised_background_color" format="color"/>
         <attr name="button_raised_ripple_color" format="color"/>
+        <attr name="button_raised_background_color_disable" format="color"/>
+        <attr name="button_raised_text_color_disable" format="color"/>
     </declare-styleable>
 
     <!-- Flat Button -->

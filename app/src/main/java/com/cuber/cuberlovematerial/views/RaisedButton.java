@@ -22,7 +22,7 @@ import com.cuber.cuberlovematerial.R;
 
 public class RaisedButton extends Button {
 
-    final int ANIMATION_DURATION_DISABLED = 500;
+    final int ANIMATION_DURATION_DISABLED = 250;
     final int ANIMATION_DURATION_FOCUS = 2500;
     final int ANIMATION_DURATION_PRESS = 250;
     final int ANIMATION_DURATION_UP = 500;
@@ -47,6 +47,9 @@ public class RaisedButton extends Button {
 
     int backgroundColor = Color.BLACK;
     int rippleColor = Color.BLACK;
+    int disableColor = Color.LTGRAY;
+    int disableTextColor = Color.WHITE;
+    int textColor;
 
     RectF rectF;
     float padding = 6;
@@ -79,6 +82,7 @@ public class RaisedButton extends Button {
     private void setAttributes(Context context, AttributeSet attrs) {
         Resources.Theme theme = context.getTheme();
         if (theme != null) {
+            textColor = getTextColors().getDefaultColor();
             TypedArray typedArray = theme.obtainStyledAttributes(attrs, R.styleable.RaisedButton, 0, 0);
             if (typedArray != null) {
 
@@ -93,6 +97,12 @@ public class RaisedButton extends Button {
                             break;
                         case R.styleable.RaisedButton_button_raised_ripple_color:
                             rippleColor = typedArray.getColor(i, 0xFFFFFFFF);
+                            break;
+                        case R.styleable.RaisedButton_button_raised_background_color_disable:
+                            disableColor = typedArray.getColor(i, disableColor);
+                            break;
+                        case R.styleable.RaisedButton_button_raised_text_color_disable:
+                            disableTextColor = typedArray.getColor(i, disableTextColor);
                             break;
                     }
                 }
@@ -121,7 +131,9 @@ public class RaisedButton extends Button {
     @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
-        changeTextColor(enabled);
+        changeDisableBackgroundColor(enabled);
+        changeDisableTextColor(enabled);
+        changeDisableShadowColor(enabled);
     }
 
     @Override
@@ -198,11 +210,10 @@ public class RaisedButton extends Button {
         super.onDraw(canvas);
     }
 
-    private void changeTextColor(boolean enabled) {
+    private void changeDisableTextColor(boolean enabled) {
         ValueAnimator colorAnimation;
-        int textColor = getTextColors().getDefaultColor();
-        int disabledTextColor = Color.argb((int) (255 * 0.3), Color.red(textColor), Color.green(textColor), Color.blue(textColor));
-        int normalTextColor = Color.argb((int) (255 * 1.0), Color.red(textColor), Color.green(textColor), Color.blue(textColor));
+        int disabledTextColor = disableTextColor;
+        int normalTextColor = textColor;
 
         if (enabled) {
             colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), disabledTextColor, normalTextColor);
@@ -214,7 +225,53 @@ public class RaisedButton extends Button {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 setTextColor((Integer) valueAnimator.getAnimatedValue());
+            }
+        });
+        colorAnimation.setDuration(ANIMATION_DURATION_DISABLED);
+        colorAnimation.start();
+    }
 
+    private void changeDisableBackgroundColor(boolean enabled) {
+        ValueAnimator colorAnimation;
+
+        int disabledTextColor = Color.argb((int) (255 * 0.3), Color.red(disableColor), Color.green(disableColor), Color.blue(disableColor));
+        int normalTextColor = backgroundColor;
+
+        if (enabled) {
+            colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), disabledTextColor, normalTextColor);
+            backgroundPaint.setShadowLayer(SHADOW_RADIUS, SHADOW_OFFSET_X, SHADOW_OFFSET_Y, Color.argb((int) (255 * 0.75), Color.red(shadowColor), Color.green(shadowColor), Color.blue(shadowColor)));
+        } else {
+            colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), normalTextColor, disabledTextColor);
+            backgroundPaint.setShadowLayer(SHADOW_RADIUS, SHADOW_OFFSET_X, SHADOW_OFFSET_Y, Color.argb((int) (255 * 0.0), Color.red(shadowColor), Color.green(shadowColor), Color.blue(shadowColor)));
+        }
+
+        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+
+                backgroundPaint.setColor((Integer) valueAnimator.getAnimatedValue());
+                invalidate();
+            }
+        });
+        colorAnimation.setDuration(ANIMATION_DURATION_DISABLED);
+        colorAnimation.start();
+    }
+
+    private void changeDisableShadowColor(boolean enabled) {
+        ValueAnimator colorAnimation;
+
+        if (enabled) {
+            colorAnimation = ValueAnimator.ofFloat(0.0f, 0.75f);
+        } else {
+            colorAnimation = ValueAnimator.ofFloat(0.75f, 0.0f);
+        }
+
+        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                float v = (float) valueAnimator.getAnimatedValue();
+                backgroundPaint.setShadowLayer(SHADOW_RADIUS * v * 100 / 75, SHADOW_OFFSET_X, SHADOW_OFFSET_Y, Color.argb((int) (255 * v), Color.red(shadowColor), Color.green(shadowColor), Color.blue(shadowColor)));
+                invalidate();
             }
         });
         colorAnimation.setDuration(ANIMATION_DURATION_DISABLED);

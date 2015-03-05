@@ -38,4 +38,6 @@
     <color name="pink_light">#FF80AB</color>
     <color name="pink_dark">#F50057</color>
 
+    <color name="grey_400">#BDBDBD</color>
+    <color name="grey_500">#9E9E9E</color>
 </resources>
