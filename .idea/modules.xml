@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CuberLoveMaterial.iml" filepath="$PROJECT_DIR$/CuberLoveMaterial.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/material-buttons/material-buttons.iml" filepath="$PROJECT_DIR$/material-buttons/material-buttons.iml" />
     </modules>
   </component>
 </project>

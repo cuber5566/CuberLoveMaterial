@@ -25,7 +25,7 @@ public class RaisedButton extends Button {
     final int ANIMATION_DURATION_DISABLED = 250;
     final int ANIMATION_DURATION_FOCUS = 2500;
     final int ANIMATION_DURATION_PRESS = 250;
-    final int ANIMATION_DURATION_UP = 500;
+    final int ANIMATION_DURATION_UP = 750;
 
     final int STATE_DOWN = 0;
     final int STATE_UP = 1;
@@ -228,6 +228,7 @@ public class RaisedButton extends Button {
                 setTextColor((Integer) valueAnimator.getAnimatedValue());
             }
         });
+        colorAnimation.setInterpolator(new DecelerateInterpolator());
         colorAnimation.setDuration(ANIMATION_DURATION_DISABLED);
         colorAnimation.start();
     }
@@ -240,10 +241,8 @@ public class RaisedButton extends Button {
 
         if (enabled) {
             colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), disabledTextColor, normalTextColor);
-            backgroundPaint.setShadowLayer(SHADOW_RADIUS, SHADOW_OFFSET_X, SHADOW_OFFSET_Y, Color.argb((int) (255 * 0.75), Color.red(shadowColor), Color.green(shadowColor), Color.blue(shadowColor)));
         } else {
             colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), normalTextColor, disabledTextColor);
-            backgroundPaint.setShadowLayer(SHADOW_RADIUS, SHADOW_OFFSET_X, SHADOW_OFFSET_Y, Color.argb((int) (255 * 0.0), Color.red(shadowColor), Color.green(shadowColor), Color.blue(shadowColor)));
         }
 
         colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -254,6 +253,7 @@ public class RaisedButton extends Button {
                 invalidate();
             }
         });
+        colorAnimation.setInterpolator(new DecelerateInterpolator());
         colorAnimation.setDuration(ANIMATION_DURATION_DISABLED);
         colorAnimation.start();
     }
@@ -275,6 +275,7 @@ public class RaisedButton extends Button {
                 invalidate();
             }
         });
+        colorAnimation.setInterpolator(new DecelerateInterpolator());
         colorAnimation.setDuration(ANIMATION_DURATION_DISABLED);
         colorAnimation.start();
     }
